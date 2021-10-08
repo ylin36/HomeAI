@@ -14,8 +14,6 @@ from functools import wraps
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'w6iq01EhWRrsZgDD2wTQeQwbdJrKU2Rny3jPuM6vUTnRCtIYcOF9mKwms46l2HI'
 
-DETECTION_URL = "/v1/object-detection/yolov5s"
-
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -42,7 +40,7 @@ def login():
 
     return make_response('Unauthorized', 401, {'WWW-Authenticate': 'Basic realm="Login Required"'})
 
-@app.route(DETECTION_URL, methods=["POST"])
+@app.route('inference', methods=["POST"])
 @token_required
 def predict():
     if not request.method == "POST":
