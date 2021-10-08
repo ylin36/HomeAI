@@ -40,7 +40,7 @@ def login():
 
     return make_response('Unauthorized', 401, {'WWW-Authenticate': 'Basic realm="Login Required"'})
 
-@app.route('inference', methods=["POST"])
+@app.route('/inference', methods=["POST"])
 @token_required
 def predict():
     if not request.method == "POST":
